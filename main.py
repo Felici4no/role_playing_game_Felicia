@@ -1,5 +1,4 @@
-from sys import *
+from engines import *
 
-nickname = get_nick()
-
-print(f'seu nickname')
+get_nick()
+print(f'Seu nickname é:')
