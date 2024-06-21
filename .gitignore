@@ -1,1 +1,6 @@
+# ignorando .idea para preservar conteúdo sensível
 .idea/
+
+# ignorando arquivos gerados pelo python
+__pycache__/
+*.pyc
