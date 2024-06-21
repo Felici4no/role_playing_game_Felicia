@@ -1,4 +1,10 @@
 from engines import *
 
 nickname = get_nick()
-print(f'Seu nickname é: {nickname}')
+nickname = nickname.title()
+
+
+
+# Testando a função
+textcolor('vermelho', 'Este texto deve ser vermelho')
+
