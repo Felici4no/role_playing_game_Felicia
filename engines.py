@@ -1,16 +1,14 @@
 print('...._....')
 import time
 import sys
-#Basic ux ui
+##Basic ux ui
+
 def typewriter(text, delay=0.1):
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(delay)
     print()  # Para pular para a próxima linha após terminar o texto
-
-# Testando a função com um atraso menor para efeito mais realista
-
 
 def textcolor(color, text):
     # Definindo os códigos de cores
@@ -46,6 +44,7 @@ def get_nick():
     while True:
         nick = input('Nick: ')
         if len(nick) >= 4:
-            return nick
+            return nick.title()
         else:
-            print('Nick inválido. Deve ter pelo menos 4 caracteres.')
+            textcolor('vermelho','Nick inválido. Deve ter pelo menos 4 caracteres.')
+
