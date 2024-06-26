@@ -4,6 +4,8 @@ class Item:
         self.atributo = atributo
         self.tamanho = tamanho
 
+    def __repr__(self):
+        return f"Item(nome={self.nome}, atributo={self.atributo}, tamanho={self.tamanho})"
 
 class Mochila:
     def __init__(self, nome):
@@ -12,74 +14,47 @@ class Mochila:
 
     def entradaItem(self, obj):
         self.slots[obj.nome] = obj
+        print(f'Item {obj.nome} adicionado à mochila {self.nome}')
 
     def saidaItem(self, item_nome):
         if item_nome in self.slots:
             del self.slots[item_nome]
-            print(f'Item {item_nome} removido da mochila')
+            print(f'Item {item_nome} removido da mochila {self.nome}')
         else:
-            print(f'Item {item_nome} não encontrado na mochila')
+            print(f'Item {item_nome} não encontrado na mochila {self.nome}')
 
     def usarItem(self, item_nome):
         if item_nome in self.slots:
             print(f'Usando o item {item_nome}')
         else:
-            print(f'Item {item_nome} não encontrado na mochila')
+            print(f'Item {item_nome} não encontrado na mochila {self.nome}')
 
     def showStatus(self):
-        print(f'Mochila {self.nome} tem {len(self.slots)} itens:\n{self.slots}')
+        print(f'Mochila {self.nome} tem {len(self.slots)} itens:')
+        for item_nome, item in self.slots.items():
+            print(f' - {item}')
 
-
-class Personagem:
-    def __init__(self, nome, vida, ataque, defesa, velocidade):
-        self.nome = nome
-        self.vida = vida
-        self.ataque = ataque
-        self.defesa = defesa
-        self.velocidade = velocidade
-        self.slots = {}
-
-    def status(self):
-        uxVida = '+' * self.vida
-        print('_______________________')
-        print(f'{self.nome} | {uxVida}')
-        print(f'ATK: {self.ataque} | DEF: {self.defesa}')
-        print(f'VEL: {self.velocidade} | BAG: {len(self.slots)}')
-        print('_______________________')
-
-    def bag_interna(self, action):
-        if action == 1 or action == 'usar':
-            print('Selecione qual item deseja usar:')
-        elif action == 2 or action == 'remover':
-            print('Selecione qual item deseja remover:')
-        else:
-            print('Erro function')
-
-    def bag_externa(self, action, add):
-        if action == 1 or action == 'adicionar':
-            print('Selecionando item para adicionar:')
-            self.slots[add.nome] = add
-        else:
-            print('Erro function')
-
-    def status_bag(self):
-        for item_nome in self.slots:
-            print(f'{item_nome}: {self.slots[item_nome]}')
-
-
-# Criando instâncias
-lucas = Personagem('Lucas', 10, 3, 2, 1)
+# Criando instâncias de Item
 graveto = Item('Gravetinho', {'ataque': -1}, 1)
+pocao = Item('Poção de Vida', {'vida': +5}, 1)
+escudo = Item('Escudo de Madeira', {'defesa': +2}, 3)
+
+# Criando uma instância de Mochila
 bag = Mochila('Mochila do Lucas')
 
-# Adicionando item à mochila
+# Adicionando itens à mochila
 bag.entradaItem(graveto)
+bag.entradaItem(pocao)
+bag.entradaItem(escudo)
+
+# Mostrando o status da mochila
 bag.showStatus()
 
-# Adicionando item à mochila interna do personagem
-lucas.bag_externa(1, graveto)
-lucas.status()
-lucas.status_bag()
+# Removendo um item da mochila
+bag.saidaItem('Gravetinho')
 
-# Usando item
-bag.usarItem('Gravetinho')
+# Mostrando o status atualizado da mochila
+bag.showStatus()
+
+# Usando um item da mochila
+bag.usarItem('Poção de Vida')
